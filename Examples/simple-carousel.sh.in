@@ -1,0 +1,18 @@
+#! /bin/sh
+
+## Use this file with MODE7, e.g.:
+##
+## $ ./MODE7 -p 'ssh raspi ./raspi-teletext/teletext -l 66 -' -- /bin/sh Examples/simple-carousel.sh 10
+##
+
+cd "@abs_top_srcdir@/Examples"
+
+period="$1"
+[ -z "$period" ] && period="5"
+
+while true ; do
+	for file in *.tt8 *.ttx ; do
+		cat $file
+		sleep "$period"
+	done
+done
