@@ -1,0 +1,6 @@
+*
+!/.gitignore
+!/Makefile.am
+!/MODE7.sh.in
+!/TeletextDemo.sh.in
+!/TeletextServer.sh.in

@@ -1,0 +1,3 @@
+#! /bin/sh
+
+exec "@abs_top_builddir@/Sources/Tools/MODE7/MODE7" "$@"
