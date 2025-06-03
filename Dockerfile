@@ -11,4 +11,4 @@ RUN --mount=type=bind,target=/src /src/configure --disable-shared && make clean 
 
 FROM debian:stable-slim AS mode7
 COPY --from=build /opt/MODE7 /opt/MODE7
-CMD [ "/opt/MODE7/bin/MODE7" ]
+CMD [ "/opt/MODE7/bin/TeletextDemo" ]
