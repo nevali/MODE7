@@ -1,3 +1,5 @@
+ACLOCAL_AMFLAGS = -I BuildTools/M4
+
 SUBDIRS = Sources .
 
 EXTRA_DIST = README.md LICENSE
