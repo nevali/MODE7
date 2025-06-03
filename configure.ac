@@ -39,9 +39,9 @@ if test $build_type = release ; then
 fi
 
 if test "$GCC" = "yes" ; then
-	AS_VAR_APPEND([AM_CPPFLAGS],[" -W -Wall -Werror"])
+	AS_VAR_APPEND([AM_CPPFLAGS],[" -W -Wall"])
 	if test $build_type = debug ; then
-		AS_VAR_APPEND([AM_CPPFLAGS],[" -O0 -g"])
+		AS_VAR_APPEND([AM_CPPFLAGS],[" -O0 -g -Werror"])
 	else
 		AS_VAR_APPEND([AM_CPPFLAGS],[" -O2"])
 	fi
