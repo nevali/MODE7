@@ -7,6 +7,7 @@
 #include <ctype.h>
 #include <signal.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 using namespace MODE7;
 using namespace MODE7::Internal;

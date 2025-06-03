@@ -3,6 +3,7 @@
 
 # include <MODE7/Source.hh>
 # include <termios.h>
+# include <limits.h>
 
 namespace MODE7
 {

@@ -131,7 +131,7 @@ DemoSource::generateInfoFrame(void)
 	}
 	struct utsname name;
 	char *t;
-	char buf[128];
+	char buf[260];
 
 	uname(&name);
 	infoProcessor_->clear();

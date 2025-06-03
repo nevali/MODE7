@@ -1,5 +1,6 @@
 #include <cassert>
 #include <cstring>
+#include <cstdlib>
 #include <unistd.h>
 
 #include <MODE7/Tools/Context.hh>
