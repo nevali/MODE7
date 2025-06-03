@@ -95,9 +95,10 @@ DemoSource::generateDemoFrame(void)
 	for(int y = 1; y <= MODE7_TEXTROWS; y++)
 	{
 		processor()->gotoxy(1, y);
-		/* white yellow cyan green magenta red blue */
+		/* white yellow cyan green magenta red blue black */
 		processor()->puts("\207\235   \203\235   \206\235   \202\235   \205\235   \201\235   \204\235    \234   ");
 	}
+	updateDemoFrame();
 }
 
 void
@@ -109,15 +110,8 @@ DemoSource::updateDemoFrame(void)
 	{
 		return;
 	}
-	demoProcessor_->gotoxy(15, 11);
-	if(now_ % 2)
-	{
-		strftime(buf, sizeof(buf), "\234\215%H:%M:%S \201\235", &localtime_);
-	}
-	else
-	{
-		strftime(buf, sizeof(buf), "\234\215%H:%M:%S ", &localtime_);
-	}
+	demoProcessor_->gotoxy(15, 20);
+	strftime(buf, sizeof(buf), "\234\215\207%H:%M:%S  \201\235", &localtime_);
 	demoProcessor_->puts(buf);
 }
 
@@ -139,20 +133,23 @@ DemoSource::generateInfoFrame(void)
 	{
 		*t = 0;
 	}
-	snprintf(buf, sizeof(buf), "\nHello\n\nThis is the second page of the teletext demo on %s (%s %s)\n\n", name.nodename, name.sysname, name.machine);
+	snprintf(buf, sizeof(buf), "\nHello\r\n\nThis is the second page of the Teletext demo on %s (%s %s)\r\n\n", name.nodename, name.sysname, name.machine);
 	infoProcessor_->puts(buf);
 }
 
 void
 DemoSource::updateInfoFrame(void)
 {
-	char buf[32];
+	char buf[MODE7_WIDTH];
 
 	if(nullptr == infoProcessor_)
 	{
 		return;
 	}
-	strftime(buf, sizeof(buf), "The time now is %H:%M:%S UTC\n", &utc_);
+	strftime(buf, sizeof(buf), "The time now is %H:%M:%S UTC", &utc_);
+	infoProcessor_->gotoxy(1, 8);
+	infoProcessor_->puts(buf);	
+	strftime(buf, sizeof(buf), "   ... which is %H:%M:%S %Z", &localtime_);
 	infoProcessor_->gotoxy(1, 10);
 	infoProcessor_->puts(buf);	
 }
