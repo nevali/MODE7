@@ -7,7 +7,7 @@ RUN apt-get update -y && apt-get install -f -y --no-install-recommends build-ess
 
 RUN mkdir /build
 WORKDIR /build
-RUN --mount=type=bind,target=/src /src/configure --disable-shared && make clean && make all && make check && make install
+RUN --mount=type=bind,target=/src /src/configure --disable-debug && make clean && make all && make check && make install
 
 FROM debian:stable-slim AS mode7
 COPY --from=build /opt/MODE7 /opt/MODE7
