@@ -43,13 +43,15 @@ bool
 DemoSource::processPendingEvents(void)
 {
 	now_ = Clock::sharedClock()->now().secs;
+	localtime_r(&now_, &localtime_);
 
 	if(now_ == lastTime_)
 	{
+		/* update the demo frame on every field */
+		updateDemoFrame();
 		return true;
 	}
 	gmtime_r(&now_, &utc_);
-	localtime_r(&now_, &localtime_);
 	updateDemoFrame();
 	updateInfoFrame();
 	updateEngineeringTest();
@@ -110,8 +112,12 @@ DemoSource::updateDemoFrame(void)
 	{
 		return;
 	}
-	demoProcessor_->gotoxy(15, 20);
-	strftime(buf, sizeof(buf), "\234\215\207%H:%M:%S  \201\235", &localtime_);
+	demoProcessor_->gotoxy(13, 20);
+	/* <BBG> <DH> <A7> HH:MM:SS <A1> <NBG> */
+	strftime(buf, sizeof(buf), "\234\215\207%H:%M:%S", &localtime_);
+	demoProcessor_->puts(buf);
+	demoProcessor_->gotoxy(13 + strlen(buf), 20);
+	snprintf(buf, sizeof(buf), ".%02d  \201\235", Clock::sharedClock()->now().field);
 	demoProcessor_->puts(buf);
 }
 
